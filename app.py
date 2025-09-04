@@ -42,8 +42,8 @@ with app.app_context():
     
     # Load initial data if database is empty
     if models.Movie.query.count() == 0:
-        logging.info("Loading initial movie data...")
-        data_loader.load_tmdb_data()
+        logging.info("Loading initial Netflix data...")
+        data_loader.load_netflix_data()
 
 @app.route('/')
 def index():
@@ -64,7 +64,7 @@ def search_movies():
             return jsonify({'error': 'Query parameter q is required'}), 400
         
         movies = models.Movie.query.filter(
-            models.Movie.title.contains(query)
+            models.Movie.title.ilike(f'%{query}%')
         ).limit(10).all()
         
         results = []
@@ -72,11 +72,15 @@ def search_movies():
             results.append({
                 'id': movie.id,
                 'title': movie.title,
-                'poster_url': movie.poster_url,
-                'overview': movie.overview,
-                'genres': movie.genres.split(',') if movie.genres else [],
-                'release_date': movie.release_date,
-                'vote_average': movie.vote_average
+                'type': movie.content_type,
+                'director': movie.director,
+                'cast': movie.cast,
+                'country': movie.country,
+                'release_year': movie.release_year,
+                'rating': movie.rating,
+                'duration': movie.duration,
+                'genres': movie.listed_in.split(',') if movie.listed_in else [],
+                'description': movie.description
             })
         
         return jsonify({'results': results})
@@ -93,7 +97,7 @@ def recommend():
         if not title:
             return jsonify({'error': 'Title parameter is required'}), 400
         
-        # Find the movie
+        # Find the content
         movie = models.Movie.query.filter(
             models.Movie.title.ilike(f'%{title}%')
         ).first()
@@ -109,20 +113,30 @@ def recommend():
             results.append({
                 'id': rec_movie.id,
                 'title': rec_movie.title,
-                'poster_url': rec_movie.poster_url,
-                'overview': rec_movie.overview,
-                'genres': rec_movie.genres.split(',') if rec_movie.genres else [],
-                'release_date': rec_movie.release_date,
-                'vote_average': rec_movie.vote_average
+                'type': rec_movie.content_type,
+                'director': rec_movie.director,
+                'cast': rec_movie.cast,
+                'country': rec_movie.country,
+                'release_year': rec_movie.release_year,
+                'rating': rec_movie.rating,
+                'duration': rec_movie.duration,
+                'genres': rec_movie.listed_in.split(',') if rec_movie.listed_in else [],
+                'description': rec_movie.description
             })
         
         return jsonify({
             'source_movie': {
                 'id': movie.id,
                 'title': movie.title,
-                'poster_url': movie.poster_url,
-                'overview': movie.overview,
-                'genres': movie.genres.split(',') if movie.genres else []
+                'type': movie.content_type,
+                'director': movie.director,
+                'cast': movie.cast,
+                'country': movie.country,
+                'release_year': movie.release_year,
+                'rating': movie.rating,
+                'duration': movie.duration,
+                'genres': movie.listed_in.split(',') if movie.listed_in else [],
+                'description': movie.description
             },
             'recommendations': results
         })
@@ -171,11 +185,15 @@ def group_recommend():
             results.append({
                 'id': rec_movie.id,
                 'title': rec_movie.title,
-                'poster_url': rec_movie.poster_url,
-                'overview': rec_movie.overview,
-                'genres': rec_movie.genres.split(',') if rec_movie.genres else [],
-                'release_date': rec_movie.release_date,
-                'vote_average': rec_movie.vote_average
+                'type': rec_movie.content_type,
+                'director': rec_movie.director,
+                'cast': rec_movie.cast,
+                'country': rec_movie.country,
+                'release_year': rec_movie.release_year,
+                'rating': rec_movie.rating,
+                'duration': rec_movie.duration,
+                'genres': rec_movie.listed_in.split(',') if rec_movie.listed_in else [],
+                'description': rec_movie.description
             })
         
         return jsonify({

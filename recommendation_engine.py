@@ -28,22 +28,24 @@ class RecommendationEngine:
             # Create DataFrame
             movie_data = []
             for movie in movies:
-                # Combine genres and keywords for content-based filtering
+                # Combine genres and description for content-based filtering
                 content = ""
-                if movie.genres:
-                    content += movie.genres.replace(',', ' ')
-                if movie.keywords:
-                    content += " " + movie.keywords.replace(',', ' ')
-                if movie.overview:
-                    content += " " + movie.overview
+                if movie.listed_in:
+                    content += movie.listed_in.replace(',', ' ')
+                if movie.description:
+                    content += " " + movie.description
+                if movie.cast:
+                    content += " " + movie.cast.replace(',', ' ')
+                if movie.director:
+                    content += " " + movie.director
                 
                 movie_data.append({
                     'id': movie.id,
                     'title': movie.title,
                     'content': content.strip(),
-                    'genres': movie.genres or '',
-                    'vote_average': movie.vote_average or 0,
-                    'popularity': movie.popularity or 0
+                    'genres': movie.listed_in or '',
+                    'type': movie.content_type or '',
+                    'release_year': movie.release_year or 0
                 })
             
             self.movies_df = pd.DataFrame(movie_data)
