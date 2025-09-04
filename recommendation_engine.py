@@ -88,7 +88,7 @@ class RecommendationEngine:
             sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)[1:limit+1]
             
             # Get recommended movie IDs
-            recommended_ids = [self.movies_df.iloc[i[0]]['id'] for i in sim_scores]
+            recommended_ids = [int(self.movies_df.iloc[i[0]]['id']) for i in sim_scores]
             
             # Fetch movies from database
             recommended_movies = Movie.query.filter(Movie.id.in_(recommended_ids)).all()
@@ -151,7 +151,7 @@ class RecommendationEngine:
             filtered_scores = sorted(filtered_scores, key=lambda x: x[1], reverse=True)[:limit]
             
             # Get recommended movie IDs
-            recommended_ids = [self.movies_df.iloc[i[0]]['id'] for i in filtered_scores]
+            recommended_ids = [int(self.movies_df.iloc[i[0]]['id']) for i in filtered_scores]
             
             # Fetch movies from database
             recommended_movies = Movie.query.filter(Movie.id.in_(recommended_ids)).all()

@@ -192,6 +192,116 @@ class DataLoader:
                 'vote_average': 8.8,
                 'vote_count': 1900000,
                 'popularity': 88.0
+            },
+            {
+                'tmdb_id': 6,
+                'title': 'Inception',
+                'overview': 'A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
+                'genres': 'Action,Sci-Fi,Thriller',
+                'keywords': 'dreams,heist,reality,science fiction',
+                'release_date': '2010-07-16',
+                'vote_average': 8.8,
+                'vote_count': 2100000,
+                'popularity': 83.0
+            },
+            {
+                'tmdb_id': 7,
+                'title': 'The Matrix',
+                'overview': 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
+                'genres': 'Action,Sci-Fi',
+                'keywords': 'virtual reality,hacker,simulation,action',
+                'release_date': '1999-03-31',
+                'vote_average': 8.7,
+                'vote_count': 1900000,
+                'popularity': 80.0
+            },
+            {
+                'tmdb_id': 8,
+                'title': 'Goodfellas',
+                'overview': 'The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners.',
+                'genres': 'Biography,Crime,Drama',
+                'keywords': 'mafia,crime,biography,gangster',
+                'release_date': '1990-09-21',
+                'vote_average': 8.7,
+                'vote_count': 1000000,
+                'popularity': 75.0
+            },
+            {
+                'tmdb_id': 9,
+                'title': 'Titanic',
+                'overview': 'A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.',
+                'genres': 'Drama,Romance',
+                'keywords': 'ship,love,disaster,romance',
+                'release_date': '1997-12-19',
+                'vote_average': 7.8,
+                'vote_count': 1100000,
+                'popularity': 85.0
+            },
+            {
+                'tmdb_id': 10,
+                'title': 'Avatar',
+                'overview': 'A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.',
+                'genres': 'Action,Adventure,Fantasy,Sci-Fi',
+                'keywords': 'alien,future,planet,environment',
+                'release_date': '2009-12-18',
+                'vote_average': 7.6,
+                'vote_count': 1200000,
+                'popularity': 90.0
+            },
+            {
+                'tmdb_id': 11,
+                'title': 'The Lion King',
+                'overview': 'A Lion cub crown prince is tricked by a treacherous uncle into thinking he caused his father\'s death and flees into exile in despair.',
+                'genres': 'Animation,Adventure,Drama,Family,Musical',
+                'keywords': 'lion,africa,animals,family',
+                'release_date': '1994-06-24',
+                'vote_average': 8.5,
+                'vote_count': 800000,
+                'popularity': 88.0
+            },
+            {
+                'tmdb_id': 12,
+                'title': 'Star Wars',
+                'overview': 'Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire\'s world-destroying battle station.',
+                'genres': 'Adventure,Fantasy,Sci-Fi',
+                'keywords': 'space,jedi,empire,rebellion',
+                'release_date': '1977-05-25',
+                'vote_average': 8.6,
+                'vote_count': 1300000,
+                'popularity': 92.0
+            },
+            {
+                'tmdb_id': 13,
+                'title': 'Jurassic Park',
+                'overview': 'A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park\'s cloned dinosaurs to run loose.',
+                'genres': 'Adventure,Sci-Fi,Thriller',
+                'keywords': 'dinosaurs,island,science,adventure',
+                'release_date': '1993-06-11',
+                'vote_average': 8.1,
+                'vote_count': 1400000,
+                'popularity': 89.0
+            },
+            {
+                'tmdb_id': 14,
+                'title': 'The Avengers',
+                'overview': 'Earth\'s mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.',
+                'genres': 'Action,Adventure,Sci-Fi',
+                'keywords': 'superhero,team,action,marvel',
+                'release_date': '2012-05-04',
+                'vote_average': 8.0,
+                'vote_count': 1500000,
+                'popularity': 94.0
+            },
+            {
+                'tmdb_id': 15,
+                'title': 'Toy Story',
+                'overview': 'A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy\'s room.',
+                'genres': 'Animation,Adventure,Comedy,Family',
+                'keywords': 'toys,friendship,animation,adventure',
+                'release_date': '1995-11-22',
+                'vote_average': 8.3,
+                'vote_count': 900000,
+                'popularity': 87.0
             }
         ]
         
