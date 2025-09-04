@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Recommendations - MovieFlix</title>
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <i class="fas fa-film me-2"></i>MovieFlix
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                <a class="nav-link active" href="{{ url_for('group') }}">Group Mode</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <!-- Hero Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 mb-3">
+                <i class="fas fa-users me-3"></i>Group Movie Night
+            </h1>
+            <p class="lead">Find movies that everyone will enjoy! Add your favorite movies and get recommendations that satisfy the whole group.</p>
+        </div>
+
+        <!-- Input Section -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">
+                            <i class="fas fa-plus me-2"></i>Add Movies You All Enjoyed
+                        </h5>
+                        
+                        <!-- Movie Input -->
+                        <div class="input-group mb-3">
+                            <input type="text" id="movieInput" class="form-control" placeholder="Search and add a movie...">
+                            <button class="btn btn-outline-secondary" type="button" id="addMovieBtn">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+
+                        <!-- Search Results for Adding -->
+                        <div id="addMovieResults" class="mb-3" style="display: none;">
+                            <div id="addMovieResultsList">
+                                <!-- Search results for adding will appear here -->
+                            </div>
+                        </div>
+
+                        <!-- Selected Movies List -->
+                        <div id="selectedMoviesList" class="mb-3">
+                            <h6 class="mb-2">Selected Movies:</h6>
+                            <div id="selectedMoviesContainer">
+                                <p class="text-muted">No movies selected yet. Start by searching for movies above.</p>
+                            </div>
+                        </div>
+
+                        <!-- Get Recommendations Button -->
+                        <div class="text-center">
+                            <button id="getGroupRecommendationsBtn" class="btn btn-success btn-lg" disabled>
+                                <i class="fas fa-magic me-2"></i>Get Group Recommendations
+                            </button>
+                            <div class="form-text">Add at least one movie to get recommendations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Source Movies Section -->
+        <div id="sourceMoviesSection" class="mb-5" style="display: none;">
+            <h3 class="mb-3">Based on your group's preferences:</h3>
+            <div id="sourceMoviesContainer" class="row">
+                <!-- Source movies will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Group Recommendations Section -->
+        <div id="groupRecommendationsSection" style="display: none;">
+            <h3 class="mb-4">
+                <i class="fas fa-magic me-2"></i>Perfect for Your Group
+            </h3>
+            <div id="groupRecommendationsList" class="row">
+                <!-- Group recommendations will be populated here -->
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="text-center" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Finding perfect recommendations for your group...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="alert alert-danger" role="alert" style="display: none;">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <span id="errorMessage">Something went wrong. Please try again.</span>
+        </div>
+
+        <!-- How it Works Section -->
+        <div class="row text-center mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-search fa-2x text-primary mb-3"></i>
+                        <h5 class="card-title">1. Add Movies</h5>
+                        <p class="card-text">Each person adds movies they enjoyed. Search and select from our database.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-calculator fa-2x text-primary mb-3"></i>
+                        <h5 class="card-title">2. Algorithm Magic</h5>
+                        <p class="card-text">Our algorithm analyzes all preferences to find movies with the best overall match.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-heart fa-2x text-primary mb-3"></i>
+                        <h5 class="card-title">3. Perfect Match</h5>
+                        <p class="card-text">Get recommendations that balance everyone's tastes for the perfect movie night.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        // Initialize group functionality when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeGroupMode();
+        });
+    </script>
+</body>
+</html>

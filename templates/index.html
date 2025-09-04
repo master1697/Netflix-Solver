@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieFlix - Movie Recommendations</title>
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <i class="fas fa-film me-2"></i>MovieFlix
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                <a class="nav-link" href="{{ url_for('group') }}">Group Mode</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <!-- Hero Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 mb-3">Discover Your Next Favorite Movie</h1>
+            <p class="lead">Get personalized movie recommendations based on your preferences</p>
+        </div>
+
+        <!-- Search Section -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">
+                            <i class="fas fa-search me-2"></i>Find Movies You Love
+                        </h5>
+                        <div class="input-group">
+                            <input type="text" id="movieSearch" class="form-control" placeholder="Search for a movie you enjoyed...">
+                            <button class="btn btn-primary" type="button" id="searchBtn">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                        <div class="form-text">Start typing to search for movies</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Results -->
+        <div id="searchResults" class="mb-5" style="display: none;">
+            <h5 class="mb-3">Search Results</h5>
+            <div id="searchResultsList" class="row">
+                <!-- Search results will be populated here -->
+            </div>
+        </div>
+
+        <!-- Selected Movie -->
+        <div id="selectedMovie" class="mb-5" style="display: none;">
+            <h5 class="mb-3">Selected Movie</h5>
+            <div id="selectedMovieCard">
+                <!-- Selected movie will be displayed here -->
+            </div>
+            <div class="text-center mt-3">
+                <button id="getRecommendationsBtn" class="btn btn-success btn-lg">
+                    <i class="fas fa-magic me-2"></i>Get Recommendations
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="text-center" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Finding perfect recommendations for you...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="alert alert-danger" role="alert" style="display: none;">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <span id="errorMessage">Something went wrong. Please try again.</span>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row text-center mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-robot fa-2x text-primary mb-3"></i>
+                        <h5 class="card-title">Smart Algorithm</h5>
+                        <p class="card-text">Our content-based filtering analyzes genres, keywords, and movie descriptions to find similar films.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-users fa-2x text-primary mb-3"></i>
+                        <h5 class="card-title">Group Recommendations</h5>
+                        <p class="card-text">Planning a movie night? Get recommendations that satisfy multiple preferences at once.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-star fa-2x text-primary mb-3"></i>
+                        <h5 class="card-title">Quality Movies</h5>
+                        <p class="card-text">Discover highly-rated films from our extensive database of popular and acclaimed movies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
