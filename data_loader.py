@@ -14,6 +14,7 @@ class DataLoader:
     
     def load_tmdb_data(self, pages=5):
         """Load popular movies from TMDB"""
+        movies_loaded = False
         try:
             for page in range(1, pages + 1):
                 logging.info(f"Loading page {page} from TMDB...")
@@ -39,10 +40,14 @@ class DataLoader:
                 
                 db.session.commit()
                 logging.info(f"Saved page {page} movies to database")
+                movies_loaded = True
                 
         except Exception as e:
             logging.error(f"Error loading TMDB data: {str(e)}")
-            # Add some sample data as fallback
+        
+        # Add sample data if no movies were loaded from TMDB
+        if not movies_loaded:
+            logging.info("TMDB data loading failed, adding sample data...")
             self._add_sample_data()
     
     def _save_movie(self, movie_data):
@@ -70,19 +75,18 @@ class DataLoader:
                 keywords = [keyword['name'] for keyword in details['keywords']['keywords']]
             
             # Create movie object
-            movie = Movie(
-                tmdb_id=movie_data['id'],
-                title=movie_data.get('title', ''),
-                overview=movie_data.get('overview', ''),
-                genres=','.join(genres),
-                keywords=','.join(keywords),
-                release_date=movie_data.get('release_date', ''),
-                vote_average=movie_data.get('vote_average', 0),
-                vote_count=movie_data.get('vote_count', 0),
-                popularity=movie_data.get('popularity', 0),
-                poster_url=self._get_poster_url(movie_data.get('poster_path')),
-                backdrop_url=self._get_backdrop_url(movie_data.get('backdrop_path'))
-            )
+            movie = Movie()
+            movie.tmdb_id = movie_data['id']
+            movie.title = movie_data.get('title', '')
+            movie.overview = movie_data.get('overview', '')
+            movie.genres = ','.join(genres)
+            movie.keywords = ','.join(keywords)
+            movie.release_date = movie_data.get('release_date', '')
+            movie.vote_average = movie_data.get('vote_average', 0)
+            movie.vote_count = movie_data.get('vote_count', 0)
+            movie.popularity = movie_data.get('popularity', 0)
+            movie.poster_url = self._get_poster_url(movie_data.get('poster_path'))
+            movie.backdrop_url = self._get_backdrop_url(movie_data.get('backdrop_path'))
             
             db.session.add(movie)
             
@@ -195,7 +199,18 @@ class DataLoader:
             for movie_data in sample_movies:
                 existing_movie = Movie.query.filter_by(tmdb_id=movie_data['tmdb_id']).first()
                 if not existing_movie:
-                    movie = Movie(**movie_data)
+                    movie = Movie()
+                    movie.tmdb_id = movie_data['tmdb_id']
+                    movie.title = movie_data['title']
+                    movie.overview = movie_data['overview']
+                    movie.genres = movie_data['genres']
+                    movie.keywords = movie_data['keywords']
+                    movie.release_date = movie_data['release_date']
+                    movie.vote_average = movie_data['vote_average']
+                    movie.vote_count = movie_data['vote_count']
+                    movie.popularity = movie_data['popularity']
+                    movie.poster_url = None
+                    movie.backdrop_url = None
                     db.session.add(movie)
             
             db.session.commit()
